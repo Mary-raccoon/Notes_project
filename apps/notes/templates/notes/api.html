@@ -1,0 +1,102 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes/css/style.css' %}">
+    <title>API</title>
+</head>
+<body>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="/api">API</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/notes">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="nav-link" >Logout</a>
+        </li>
+    </ul>
+    <button id='button_json' class="btn btn-secondary">Det all users</button>
+    <button id='button_notes' class="btn btn-secondary">Get all notes</button>
+    <button id='button_red' class="btn btn-danger">Red labels</button>
+    <button id='button_blue' class='btn btn-primary'>Blue labels</button>
+    <button id='button_green' class="btn btn-success">Green labels</button>
+    <button id='button_yellow' class="btn btn-warning"'>Yellow labels</button>
+    <div id='placeholder1'>
+        Placeholder for the Ajax Response
+    </div>
+    <script>
+        $('#button_json').click(function(){
+            $.ajax({
+                url: '/notes/all.json', 
+                success: function(serverResponse) {  
+                    console.log("Received this from server:", serverResponse)
+                    console.log("Display all users")
+                    $('#placeholder1').html(JSON.stringify(serverResponse))
+                }
+            });
+        });
+        $('#button_notes').click(function(){
+            $.ajax({
+                url: '/notes/all.notes', 
+                success: function(serverResponse) {  
+                    console.log("Received this from server:", serverResponse)
+                    console.log("Display all notes")
+                    $('#placeholder1').html(JSON.stringify(serverResponse))
+                }
+            });
+        });
+        $('#button_red').click(function(){
+            $.ajax({
+                url: '/notes/red.notes', 
+                success: function(serverResponse) {  
+                    console.log("Received this from server:", serverResponse)
+                    console.log("Display red notes")
+                    $('#placeholder1').html(JSON.stringify(serverResponse))
+                }
+            });
+        });
+        $('#button_blue').click(function(){
+            $.ajax({
+                url: '/notes/blue.notes', 
+                success: function(serverResponse) {  
+                    console.log("Received this from server:", serverResponse)
+                    console.log("Display blue notes")
+                    $('#placeholder1').html(JSON.stringify(serverResponse))
+                }
+            });
+        });
+        $('#button_green').click(function(){
+            $.ajax({
+                url: '/notes/green.notes', 
+                success: function(serverResponse) {  
+                    console.log("Received this from server:", serverResponse)
+                    console.log("Display green notes")
+                    $('#placeholder1').html(JSON.stringify(serverResponse))
+                }
+            });
+        });
+        $('#button_yellow').click(function(){
+            $.ajax({
+                url: '/notes/yellow.notes', 
+                success: function(serverResponse) {  
+                    console.log("Received this from server:", serverResponse)
+                    console.log("Display yellow notes")
+                    $('#placeholder1').html(JSON.stringify(serverResponse))
+                }
+            });
+        });
+    </script>
+    </body>
+</html>

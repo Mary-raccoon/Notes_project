@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes/css/style.css' %}">
+    <title>Update</title>
+</head>
+<body class="bodies">
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="/api">API</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/notes">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="nav-link" >Logout</a>
+        </li>
+    </ul>
+
+    <div id="add_note">
+        <h3>Update Note</h3> 
+        <form  action="/{{note.id}}/update" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="type" value="post_note" class="new_note">
+            <div class="form-group">
+                <label for="label">Label:</label>
+                <select name="label" id="label" class="form-control">
+                    <option value = 'Red'>Red</option>
+                    <option value = 'Green'>Green</option>
+                    <option value = 'Yellow'>Yellow</option>
+                    <option value = 'Blue'>Blue</option>
+                </select>
+                {% if messages %}
+                <p>
+                    {% for message in messages %}
+                    {%if 'label' in message.tags %}
+                    <span style="color: red">{{ message }} </span>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>  
+            <div class="form-group">
+                <label for="desc">Description:</label>
+                <textarea name="desc" class="form-control" id="desc">{{note.desc}}</textarea>
+                {% if messages %}
+                <p>
+                    {% for message in messages %}
+                    {%if 'desc' in message.tags %}
+                    <span style="color: red">{{ message }} </span>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</body>
+</html>

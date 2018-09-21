@@ -1,0 +1,63 @@
+#index_body {
+    background-color: rgb(68, 67, 84);
+    text-align: center;
+}
+#login{
+    display: inline-block;
+    width: 20%;
+    color: white;
+    margin: 1%;
+    font-size: 14px;
+    vertical-align: top;
+    text-align: center;
+    border: 4px solid white;
+    padding: 20px;
+    border-radius: 30px;
+    margin-left: 10%;
+}
+#register{
+    display: inline-block;
+    color: white;
+    width: 20%;
+    margin: 1%;
+    font-size: 14px;
+    text-align: center;
+    border: 4px solid white;
+    padding: 20px;
+    border-radius: 30px;
+    vertical-align: top;
+}
+#head{
+    display: inline-flex;
+    margin: 2%;
+}
+#container, #add_note{
+    display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    border: 3px solid  rgb(68, 67, 84);
+    padding: 2%;
+    margin: 2%;
+    border-radius: 30px;
+}
+#add_note{
+    width: 30%;
+}
+#container{
+    width: 60%;
+}
+.bodies{
+    text-align: center;
+}
+#view_block{
+    display:inline-block;
+    text-align: start;
+    border: 3px solid  rgb(68, 67, 84);
+    border-radius: 30px;
+    padding: 2%;
+    margin: 2%;
+}
+.links{
+    padding: 2%;
+    margin: 2%;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'notes/css/style.css' %}">
+    <title>Notes</title>
+</head>
+<body>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="/api">API</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/notes">Home</a>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="nav-link" >Logout</a>
+        </li>
+    </ul>
+    <h3 id='head'>Welcome {{ request.session.name }}!</h3><br>
+    <div id="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Label</th>
+                <th>Description</th>
+                <th>Actions</th>       
+            </tr>
+            </thead>
+            <tbody>
+                {% if notes %}
+                    {% for note in notes %}                       
+                        {% if note.author.id == request.session.id %}
+                        <tr>
+                            <td>{{note.label}}</td>
+                            <td>{{note.desc}}</td>
+                            <td>
+                                <a href="/{{note.id}}/read">Read</a> 
+                                <a href="/{{note.id}}/edit">Update</a> 
+                                <a href="/{{note.id}}/destroy">Delete</a>
+                            </td>                
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <div id="add_note">
+        <h4>Add new Note</h4> 
+        <form  action="/post_note" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="type" value="post_note" class="new_note">
+            <div class="form-group">
+                <label for="label">Label:</label>
+                <select name="label" class="form-control" id="label">
+                    <option value = '--color--'>--color--</option>
+                    <option value = 'Red'>Red</option>
+                    <option value = 'Green'>Green</option>
+                    <option value = 'Yellow'>Yellow</option>
+                    <option value = 'Blue'>Blue</option>
+                </select>
+                {% if messages %}
+                <p>
+                    {% for message in messages %}
+                    {%if 'label' in message.tags %}
+                    <span style="color: red">{{ message }} </span>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>  
+            <div class="form-group">
+                <label for="desc">Description:</label>
+                <textarea name="desc" class="form-control" id="desc"></textarea>
+                {% if messages %}
+                <p>
+                    {% for message in messages %}
+                    {%if 'desc' in message.tags %}
+                    <span style="color: red">{{ message }} </span>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</body>
+</html>
