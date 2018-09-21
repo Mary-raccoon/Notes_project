@@ -132,6 +132,4 @@ def green_notes(request):
     green = Note.objects.filter(label__icontains="green") 
     return HttpResponse(serializers.serialize("json", green), content_type='application/json')
         
-# def create(request):
-#     User.objects.create(first_name=request.POST['first_name'], last_name=request.POST['last_name'], email_address=request.POST['email_address'])
-#     return render(request, 'user_login/all.html',{ "users": User.objects.order_by("-id") })
+
