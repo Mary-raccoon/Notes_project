@@ -66,4 +66,4 @@ class Note(models.Model):
     objects = NoteManager()
 
     def __repr__(self):
-        return "<Job_object: {} {} {} {} {}>".format(self.label, self.desc, self.author)
+        return "<Note_object: {} {} {}>".format(self.label, self.desc, self.author)
