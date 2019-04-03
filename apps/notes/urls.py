@@ -18,5 +18,4 @@ urlpatterns = [
     url(r'^blue.notes$', views.blue_notes),
     url(r'^green.notes$', views.green_notes),
     url(r'^yellow.notes$', views.yellow_notes),
-
-]                           
+]
