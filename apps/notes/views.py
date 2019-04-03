@@ -158,3 +158,5 @@ def blue_notes(request):
 def green_notes(request):
     green = Note.objects.filter(label__icontains="green") 
     return HttpResponse(serializers.serialize("json", green), content_type='application/json')
+        
+
